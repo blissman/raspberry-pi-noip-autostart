@@ -11,4 +11,5 @@ Install the No-IP DUC (Dynamic Update Client) by following [these instructions](
 2. Run the install script `$ ./install.sh`
 
 ## Removing Autostart
-3. If you wish to remove noip2.sh from your autostart, use `$ sudo update-rc.d -f noip2.sh remove`
+1. If you wish to remove noip2.sh from your autostart, use `$ sudo update-rc.d -f noip2.sh remove`
+2. Delete the script front your `/etc/init.d` folder: `$ sudo rm -rf /etc/init.d/noip2.sh`
