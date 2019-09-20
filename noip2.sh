@@ -12,6 +12,7 @@
 case "$1" in
     start)
         echo "noip is starting"
+        sleep 10
         # Starting Programm
         /usr/local/bin/noip2
         ;;
