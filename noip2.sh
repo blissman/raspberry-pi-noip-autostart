@@ -1,30 +1,39 @@
 #! /bin/sh
-### BEGIN INIT INFO
-# Provides: noip
-# Required-Start: $syslog
-# Required-Stop: $syslog
-# Default-Start: 2 3 4 5
-# Default-Stop: 0 1 6
-# Short-Description: noip server
-# Description:
-### END INIT INFO
- 
+# /etc/init.d/noip2.sh
+
+# Supplied by no-ip.com
+# Modified for Debian GNU/Linux by Eivind L. Rygge <eivind@rygge.org>
+# corrected 1-17-2004 by Alex Docauer <alex@docauer.net>
+
+# . /etc/rc.d/init.d/functions  # uncomment/modify for your killproc
+
+DAEMON=/usr/local/bin/noip2
+NAME=noip2
+
+test -x $DAEMON || exit 0
+
 case "$1" in
     start)
-        echo "noip is starting"
-        sleep 10
-        # Starting Programm
-        /usr/local/bin/noip2
-        ;;
+    echo -n "Starting dynamic address update: "
+    start-stop-daemon --start --exec $DAEMON
+    echo "noip2."
+    ;;
     stop)
-        echo "noip is ending"
-        # Ending Programm
-        killall noip2
-        ;;
+    echo -n "Shutting down dynamic address update:"
+    start-stop-daemon --stop --oknodo --retry 30 --exec $DAEMON
+    echo "noip2."
+    ;;
+
+    restart)
+    echo -n "Restarting dynamic address update: "
+    start-stop-daemon --stop --oknodo --retry 30 --exec $DAEMON
+    start-stop-daemon --start --exec $DAEMON
+    echo "noip2."
+    ;;
+
     *)
-        echo "Use: /etc/init.d/noip {start|stop}"
-        exit 1
-        ;;
+    echo "Usage: $0 {start|stop|restart}"
+    exit 1
 esac
- 
 exit 0
+
