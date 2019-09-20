@@ -15,6 +15,7 @@ test -x $DAEMON || exit 0
 case "$1" in
     start)
     echo -n "Starting dynamic address update: "
+    sleep 10
     start-stop-daemon --start --exec $DAEMON
     echo "noip2."
     ;;
@@ -27,6 +28,7 @@ case "$1" in
     restart)
     echo -n "Restarting dynamic address update: "
     start-stop-daemon --stop --oknodo --retry 30 --exec $DAEMON
+    sleep 10
     start-stop-daemon --start --exec $DAEMON
     echo "noip2."
     ;;
